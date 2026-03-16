@@ -125,6 +125,6 @@ public class RetailPulse
             }
 
         }while(choice!=10);
-
+  sc.close();
     }
 }
