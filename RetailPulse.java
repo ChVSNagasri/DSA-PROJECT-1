@@ -13,6 +13,9 @@ public class RetailPulse
         CircularQueue counters=new CircularQueue();
         MaxHeap heap=new MaxHeap();
         SalesSorter sorter=new SalesSorter();
+        
+
+        int billCounter = 1000; 
 
         int choice;
 
@@ -67,7 +70,7 @@ public class RetailPulse
                 break;
 
                 case 3:
-      int billCounter = 1000;
+    
        int bill = billCounter++;
 
        System.out.println("Generated Bill ID: " + bill);
