@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-
 public class RetailPulse
 {
     public static void main(String args[])
@@ -68,18 +67,18 @@ public class RetailPulse
                 break;
 
                 case 3:
+      int billCounter = 1000;
+       int bill = billCounter++;
 
-                System.out.println("Enter Bill ID");
-                int bill=sc.nextInt();
+       System.out.println("Generated Bill ID: " + bill);
 
-                System.out.println("Enter Amount");
-                double amt=sc.nextDouble();
+          System.out.println("Enter Amount");
+           double amt = sc.nextDouble();
 
-                history.addTransaction(bill,amt);
-                stack.push(bill);
+          history.addTransaction(bill, amt);
+            stack.push(bill);
 
                 break;
-
                 case 4:
 
                 history.displayTransactions();
