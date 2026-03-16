@@ -38,22 +38,23 @@ public class RetailPulse
             {
                 case 1:
 
-                System.out.println("Enter Barcode");
-                int b=sc.nextInt();
+System.out.println("Enter Barcode");
+int b = sc.nextInt();
 
-                System.out.println("Enter Name");
-                String n=sc.next();
+System.out.println("Enter Name");
+sc.nextLine();
+String n = sc.nextLine();
 
-                System.out.println("Enter Price");
-                double p=sc.nextDouble();
+System.out.println("Enter Price");
+double p = sc.nextDouble();
 
-                System.out.println("Enter Quantity");
-                int q=sc.nextInt();
+System.out.println("Enter Quantity");
+int q = sc.nextInt();
 
-                Product prod=new Product(b,n,p,q);
-                products.insert(prod);
+Product prod = new Product(b,n,p,q);
+products.insert(prod);
 
-                break;
+break;
 
                 case 2:
 
@@ -68,24 +69,61 @@ public class RetailPulse
                 System.out.println("Product not found");
 
                 break;
+                   case 3:
 
-                case 3:
-    
-       int bill = billCounter++;
+int billId = billCounter++;
 
-       System.out.println("Generated Bill ID: " + bill);
+System.out.println("\n=========== RETAILPULSE BILL ===========");
+System.out.println("Bill ID : " + billId);
+System.out.println("----------------------------------------");
 
-          System.out.println("Enter Amount");
-           double amt = sc.nextDouble();
+double totalBill = 0;
+char more = 'y';   // declare and initialize
 
-          history.addTransaction(bill, amt);
-            stack.push(bill);
+do
+{
+    System.out.println("Enter Barcode");
+    int barcode = sc.nextInt();
 
-                break;
+    Product product = products.search(barcode);
+
+    if(product == null)
+    {
+        System.out.println("Product not found");
+        continue;
+    }
+
+    System.out.println("Enter Quantity");
+    int qty = sc.nextInt();
+
+    double amount = product.price * qty;
+
+    totalBill += amount;
+
+    history.addTransaction(billId,barcode,product.name,qty,amount);
+
+    System.out.printf("%-10s %-15s %-5s %-8s\n",
+            "Barcode","Product","Qty","Amount");
+
+    System.out.printf("%-10d %-15s %-5d %-8.2f\n",
+            barcode,product.name,qty,amount);
+
+    System.out.println("----------------------------------------");
+
+    System.out.println("Add another product? (y/n)");
+    more = sc.next().charAt(0);
+
+} while(more=='y' || more=='Y');
+
+stack.push(billId);
+
+System.out.println("Total Amount : " + totalBill);
+System.out.println("========================================");
+
+break;
                 case 4:
-
-                history.displayTransactions();
-                break;
+history.displayTransactionsSorted();
+break;
 
                 case 5:
 
